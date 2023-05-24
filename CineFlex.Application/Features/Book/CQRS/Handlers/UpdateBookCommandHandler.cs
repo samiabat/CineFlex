@@ -27,18 +27,18 @@ namespace CineFlex.Application.Features.Book.CQRS.Handlers
             var response = new BaseCommandResponse<int>();
 
 
-            var seat = await _unitOfWork.SeatRepository.Get(request.bookingDto.Id);
+            var book = await _unitOfWork.BookRepository.Get(request.bookingDto.Id);
 
-            if (seat == null)
+            if (book == null)
             {
                 response.Success = false;
                 response.Message = "Update Failed";
                 return response;
             }
 
-            _mapper.Map(request.bookingDto, seat);
+            _mapper.Map(request.bookingDto, book);
 
-            await _unitOfWork.SeatRepository.Update(seat);
+            await _unitOfWork.BookRepository.Update(book);
             if (await _unitOfWork.Save() > 0)
             {
                 response.Success = true;

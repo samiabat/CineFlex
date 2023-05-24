@@ -33,15 +33,13 @@ namespace CineFlex.API.Controllers
 
         [HttpPost]
         [Route("Register")]
-        public async Task<ActionResult<Result<RegistrationResponse>>> Register([FromBody] RegisterModel registerRequest)
+        public async Task<ActionResult<Result<RegistrationResponse>>> Register([FromBody] RegisterDTO registerRequest)
         {
             var response = await _authService.Register(_mapper.Map<RegisterModel>(registerRequest));
 
             if (!response.Success || response.Value == null)
                 return HandleResult(response);
-
-            await _authService.DeleteUser(registerRequest.Email);
-            response.Success = false;
+            response.Success = true;
             return HandleResult(response);
 
         }

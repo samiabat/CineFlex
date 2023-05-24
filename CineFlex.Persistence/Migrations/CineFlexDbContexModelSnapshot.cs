@@ -22,6 +22,57 @@ namespace CineFlex.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("CineFlex.Domain.Book", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Cinima")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Movie")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Seat")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Book");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cinima = "Cinima",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Movie = "New movie",
+                            Seat = "New seat"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cinima = "Cinima",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Movie = "New movie",
+                            Seat = "New seat"
+                        });
+                });
+
             modelBuilder.Entity("CineFlex.Domain.CinemaEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -167,7 +218,7 @@ namespace CineFlex.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            DateTime = new DateTime(2023, 5, 23, 11, 45, 35, 461, DateTimeKind.Local).AddTicks(9819),
+                            DateTime = new DateTime(2023, 5, 24, 4, 2, 13, 499, DateTimeKind.Local).AddTicks(8725),
                             Movie = "new movie",
                             RowNumber = 1,
                             SeatDescription = "description",
@@ -179,7 +230,7 @@ namespace CineFlex.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            DateTime = new DateTime(2023, 5, 23, 11, 45, 35, 461, DateTimeKind.Local).AddTicks(9840),
+                            DateTime = new DateTime(2023, 5, 24, 4, 2, 13, 499, DateTimeKind.Local).AddTicks(8742),
                             Movie = "new Movie()",
                             RowNumber = 1,
                             SeatDescription = "description",

@@ -28,15 +28,15 @@ namespace CineFlex.Application.Features.Book.CQRS.Handlers
         {
             var response = new BaseCommandResponse<int>();
             
-            var seat = _mapper.Map<CineFlex.Domain.Seats>(request.bookingDto);
+            var book = _mapper.Map<CineFlex.Domain.Book>(request.bookingDto);
 
-            seat = await _unitOfWork.SeatRepository.Add(seat);
+            book = await _unitOfWork.BookRepository.Add(book);
 
             if (await _unitOfWork.Save() > 0)
             {
                 response.Success = true;
                 response.Message = "Creation Successful";
-                response.Value = seat.Id;
+                response.Value = book.Id;
             }
             else
             {

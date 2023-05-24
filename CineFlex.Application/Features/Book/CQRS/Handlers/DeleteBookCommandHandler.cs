@@ -27,9 +27,9 @@ namespace CineFlex.Application.Features.Book.CQRS.Handlers
         {
             var response = new BaseCommandResponse<int>();
 
-            var seat = await _unitOfWork.SeatRepository.Get(request.Id);
+            var book = await _unitOfWork.BookRepository.Get(request.Id);
 
-            if (seat is null)
+            if (book is null)
             {
                 response.Success = false;
                 response.Message = "Failed find a seat by that Id.";
@@ -37,19 +37,19 @@ namespace CineFlex.Application.Features.Book.CQRS.Handlers
             else
             {
 
-                await _unitOfWork.SeatRepository.Delete(seat);
+                await _unitOfWork.BookRepository.Delete(book);
 
 
                 if (await _unitOfWork.Save() > 0)
                 {
                     response.Success = true;
-                    response.Message = "Seat deleted Successful";
-                    response.Value = seat.Id;
+                    response.Message = "Booking deleted Successful";
+                    response.Value = book.Id;
                 }
                 else
                 {
                     response.Success = false;
-                    response.Message = "Seat Deletion Failed";
+                    response.Message = "Book Deletion Failed";
                 }
             }
 

@@ -47,7 +47,6 @@ namespace CinFlex.Infrastructure.Mail
             catch (Exception ex)
             {
                 //log an error message or throw an exception or both.
-                throw new Exception("Samuel Abatneh" + $"{_emailSettings.UserName} Hello world" + ex.ToString() + $"{email}");
                 result.Success = false;
                 result.Errors.Add(ex.Message);
 

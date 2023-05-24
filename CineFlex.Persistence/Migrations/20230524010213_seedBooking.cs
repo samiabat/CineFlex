@@ -9,11 +9,28 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CineFlex.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class firstMigration : Migration
+    public partial class seedBooking : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Book",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Cinima = table.Column<string>(type: "text", nullable: false),
+                    Movie = table.Column<string>(type: "text", nullable: false),
+                    Seat = table.Column<string>(type: "text", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    LastModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Book", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Cinemas",
                 columns: table => new
@@ -69,6 +86,15 @@ namespace CineFlex.Persistence.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Book",
+                columns: new[] { "Id", "Cinima", "DateCreated", "LastModifiedDate", "Movie", "Seat" },
+                values: new object[,]
+                {
+                    { 1, "Cinima", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "New movie", "New seat" },
+                    { 2, "Cinima", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "New movie", "New seat" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Cinemas",
                 columns: new[] { "Id", "ContactInformation", "DateCreated", "LastModifiedDate", "Location", "Name" },
                 values: new object[,]
@@ -91,14 +117,17 @@ namespace CineFlex.Persistence.Migrations
                 columns: new[] { "Id", "DateTime", "Movie", "RowNumber", "SeatDescription", "SeatPrice", "SeatStatus", "SeatType", "cinemaEntity" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 5, 23, 11, 45, 35, 461, DateTimeKind.Local).AddTicks(9819), "new movie", 1, "description", 100m, 2, 1, "new cinima" },
-                    { 2, new DateTime(2023, 5, 23, 11, 45, 35, 461, DateTimeKind.Local).AddTicks(9840), "new Movie()", 1, "description", 100m, 2, 1, "new CinemaEntity()" }
+                    { 1, new DateTime(2023, 5, 24, 4, 2, 13, 499, DateTimeKind.Local).AddTicks(8725), "new movie", 1, "description", 100m, 2, 1, "new cinima" },
+                    { 2, new DateTime(2023, 5, 24, 4, 2, 13, 499, DateTimeKind.Local).AddTicks(8742), "new Movie()", 1, "description", 100m, 2, 1, "new CinemaEntity()" }
                 });
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Book");
+
             migrationBuilder.DropTable(
                 name: "Cinemas");
 

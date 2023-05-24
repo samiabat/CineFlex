@@ -29,9 +29,7 @@ namespace CineFlex.Persistence.Configurations.Entities
                      Genre = "Sci Fi",
                      ReleaseYear = "2022",
                  }
-                ); ;
+             );
         }
-
-
     }
 }

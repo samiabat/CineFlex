@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CineFlex.Application.Features.Seats.DTOs;
+using CineFlex.Application.Features.Book.DTOs;
+using CineFlex.Application.Models.Identity;
 
 namespace CineFlex.Application.Profiles
 {
@@ -31,6 +33,12 @@ namespace CineFlex.Application.Profiles
             CreateMap<Seats, CreateSeatDto>().ReverseMap();
             CreateMap<Seats, UpdateSeatDto>().ReverseMap();
             CreateMap<Seats, SeatDto>().ReverseMap();
+
+            CreateMap<Book, CreateBookDto>().ReverseMap();
+            CreateMap<Book, UpdateBookDto>().ReverseMap();
+            CreateMap<Book, BookDto>().ReverseMap();
+
+            CreateMap<RegisterDTO, RegisterModel>().ReverseMap();
         }
     }
 }
